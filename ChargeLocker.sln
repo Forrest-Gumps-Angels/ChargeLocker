@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChargeLocker", "ChargeLocker\ChargeLocker.csproj", "{7DBA5C60-0745-4D19-93D0-003FF15E2B1A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4A72935C-7024-43D3-9C4D-BB51EA043B59}"
+	ProjectSection(SolutionItems) = preProject
+		dotCoverCoverageConfig.xml = dotCoverCoverageConfig.xml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChargeLocker.Unit.Test", "ChargeLocker.Unit.Test\ChargeLocker.Unit.Test.csproj", "{6FC9D97B-D75B-4152-A492-C6D96C23F3D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DBA5C60-0745-4D19-93D0-003FF15E2B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DBA5C60-0745-4D19-93D0-003FF15E2B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DBA5C60-0745-4D19-93D0-003FF15E2B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DBA5C60-0745-4D19-93D0-003FF15E2B1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FC9D97B-D75B-4152-A492-C6D96C23F3D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FC9D97B-D75B-4152-A492-C6D96C23F3D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FC9D97B-D75B-4152-A492-C6D96C23F3D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FC9D97B-D75B-4152-A492-C6D96C23F3D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6886467B-DA30-458F-8F25-C0F114B17699}
+	EndGlobalSection
+EndGlobal
