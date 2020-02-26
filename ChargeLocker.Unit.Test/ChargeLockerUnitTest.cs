@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ChargeLocker.Unit.Test
 {
     [TestFixture]
-    public class ECSUnitTest
+    public class ChargeLockerUnitTest
     {
         private ECS _uut;
         private IHeater _heater;
