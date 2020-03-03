@@ -8,5 +8,6 @@ namespace ChargeLocker
 {
     interface IRfidReader
     {
+        event EventHandler RfidDetectedEvent;
     }
 }

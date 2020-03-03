@@ -8,5 +8,6 @@ namespace ChargeLocker
 {
     interface IDisplay
     {
+        void Display(string message);
     }
 }
