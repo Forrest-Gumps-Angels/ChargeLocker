@@ -2,7 +2,7 @@
 
 namespace UsbSimulator
 {
-    public class CurrentEventArgs : EventArgs
+    public class CurrentChangedEventArgs : EventArgs
     {
         // Value in mA (milliAmpere)
         public double Current { set; get; }
@@ -11,7 +11,7 @@ namespace UsbSimulator
     public interface IUsbCharger
     {
         // Event triggered on new current value
-        event EventHandler<CurrentEventArgs> CurrentValueEvent;
+        event EventHandler<CurrentChangedEventArgs> CurrentValueEvent;
 
         // Direct access to the current current value
         double CurrentValue { get; }
