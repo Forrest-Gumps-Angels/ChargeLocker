@@ -10,10 +10,8 @@ namespace ChargeLocker
     interface IChargeControl
     {
         bool IsConnected();
-
         void StartCharge();
         void StopCharge();
         void currentChangedEventHandler(CurrentChangedEventArgs e);
-
     }
 }
