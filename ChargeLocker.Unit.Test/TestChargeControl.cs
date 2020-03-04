@@ -14,24 +14,25 @@ namespace ChargeLocker.Unit.Test
     [TestFixture]
     public class TestChargeControl
     {
-        private IChargeControl _uut;
         private StationControl _stCTRL;
-        private IChargeControl _charger;
+        private IChargeControl _uut;
         private IDisplay _display;
         private IDoor _door;
         private IRfidReader _reader;
+        private IUsbCharger _usbCharger;
 
         [SetUp]
         public void Setup()
         {
-            _charger = Substitute.For<IChargeControl>();
+            _usbCharger = new UsbChargerSimulator();
+            _uut = Substitute.For<IChargeControl>(_usbCharger);
             _display = Substitute.For<IDisplay>();
             _door    = Substitute.For<IDoor>();
             _reader  = Substitute.For<IRfidReader>();
 
-            _stCTRL = new StationControl(_charger, _display,_door, _reader);
 
-            _uut = new ChargeControl();
+            _stCTRL = new StationControl(_uut, _display,_door, _reader);
+
         }
 
         [Test]
@@ -39,13 +40,13 @@ namespace ChargeLocker.Unit.Test
         {
             _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
 
-            Assert.That(_uut.Connected, Is.True);
+            _uut.Received().StartCharge();
         }
 
         [Test]
         public void ctor_CurentValueIsZero()
         {
-            Assert.That(_uut.CurrentValue, Is.Zero);
+            //Assert.That(_uut.CurrentValue, Is.Zero);
         }
     }
 }
