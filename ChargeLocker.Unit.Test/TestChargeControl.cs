@@ -38,25 +38,47 @@ namespace ChargeLocker.Unit.Test
         [Test]
         public void ChargeController_StartCharging_When_valid_RFIDDetected()
         {
+            _door.DoorCloseEvent += Raise.Event();
+            _usbCharger.SimulateConnected(true);
             _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
+           
+
+            // Make sure that usbcharger has been started
+            Assert.Greater(_usbCharger.CurrentValue, 0);
+        }
+
+        [Test]
+        public void ChargeController_NotCharging_When_no_RFIDDetected()
+        {
+            _door.DoorCloseEvent += Raise.Event();
             _usbCharger.SimulateConnected(true);
 
-            Assert.That(_uut.IsConnected(), Is.True);
+            // Make sure that usbcharger has been started
+            Assert.AreEqual(_usbCharger.CurrentValue, 0);
         }
 
         [Test]
         public void ChargeController_IsConnected_When_UsbChargerConnected()
         {
-            _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
+            // Typisk brugsscenarie
+            _door.DoorCloseEvent += Raise.Event();
             _usbCharger.SimulateConnected(true);
+            _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
 
-            Assert.That(_uut.IsConnected(), Is.True);
+            // Make sure that usbcharger has been started
+            Assert.AreEqual(_uut.IsConnected(), true);
         }
 
         [Test]
-        public void ctor_CurentValueIsZero()
+        public void ChargeController_not_validating_connection_When_no_phone_connected()
         {
-            //Assert.That(_uut.CurrentValue, Is.Zero);
+            // Typisk brugsscenarie
+            _door.DoorCloseEvent += Raise.Event();
+            _usbCharger.SimulateConnected(false);
+            _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
+
+            // Make sure that usbcharger has been started
+            Assert.AreEqual(_uut.IsConnected(), false);
         }
     }
 }

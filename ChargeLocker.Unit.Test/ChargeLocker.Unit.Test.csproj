@@ -65,6 +65,7 @@
     <Compile Include="TestDisplay.cs" />
     <Compile Include="TestDoor.cs" />
     <Compile Include="TestRfidReader.cs" />
+    <Compile Include="TestStationControl.cs" />
     <Compile Include="TestUsbChargerSimulator.cs" />
     <Compile Include="UsbChargerSimulator.cs" />
   </ItemGroup>

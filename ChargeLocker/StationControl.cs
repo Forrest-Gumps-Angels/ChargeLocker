@@ -103,11 +103,13 @@ namespace Ladeskab
 
         private void DoorOpened(object sender, EventArgs e)
         {
+            _state = LadeskabState.DoorOpen;
             _display.Display("Tilslut telefon");
         }
 
         private void DoorClosed(object sender, EventArgs e)
         {
+            _state = LadeskabState.Available;
             _display.Display("Indlæs RFID");
         }
     }
