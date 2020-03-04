@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ChargeLocker
 {
-    class RfidDetectedEventArgs : EventArgs
+    public class RfidDetectedEventArgs : EventArgs
     {
         public int id;
     }
-    interface IRfidReader
+    public interface IRfidReader
     {
         // Event handlers
         event EventHandler<RfidDetectedEventArgs> RfidDetectedEvent;

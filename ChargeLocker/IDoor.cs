@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChargeLocker
 {
-    interface IDoor
+    public interface IDoor
     {
         event EventHandler DoorOpenEvent;
         event EventHandler DoorCloseEvent;

@@ -7,11 +7,11 @@ using UsbSimulator;
 
 namespace ChargeLocker
 {
-    interface IChargeControl
+    public interface IChargeControl
     {
         bool IsConnected();
         void StartCharge();
         void StopCharge();
-        void currentChangedEventHandler(CurrentChangedEventArgs e);
+        void currentChangedEventHandler(object sender, CurrentChangedEventArgs e);
     }
 }
