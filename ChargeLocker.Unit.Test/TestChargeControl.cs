@@ -7,27 +7,38 @@ using System.Text;
 using System.Threading.Tasks;
 using UsbSimulator;
 using ChargeLocker;
+using NSubstitute;
 
 namespace ChargeLocker.Unit.Test
 {
     [TestFixture]
-    public class TestUsbChargerSimulator
+    public class TestChargeControl
     {
-        private UsbChargerSimulator _uut;
+        private IChargeControl _uut;
+        private StationControl _stCTRL;
+        private IChargeControl _charger;
+        private IDisplay _display;
+        private IDoor _door;
+        private IRfidReader _reader;
+
         [SetUp]
         public void Setup()
         {
-            var _charger = new IChargeControl;
-            var _display = new IDisplay;
-            var _door = new IDoor;
-            var _reader = new IRfidReader;
+            _charger = Substitute.For<IChargeControl>();
+            _display = Substitute.For<IDisplay>();
+            _door    = Substitute.For<IDoor>();
+            _reader  = Substitute.For<IRfidReader>();
 
-            _uut = new StationControl();
+            _stCTRL = new StationControl(_charger, _display,_door, _reader);
+
+            _uut = new ChargeControl();
         }
 
         [Test]
-        public void ctor_IsConnected()
+        public void ChargeController_StartCharging_When_RFIDDetected()
         {
+            _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
+
             Assert.That(_uut.Connected, Is.True);
         }
 

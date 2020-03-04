@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChargeLocker
 {
-    interface IDisplay
+    public interface IDisplay
     {
         void Display(string message);
     }

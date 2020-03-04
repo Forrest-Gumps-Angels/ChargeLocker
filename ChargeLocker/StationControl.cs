@@ -33,7 +33,7 @@ namespace Ladeskab
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
         // We use constructor injection for all dependencies
-        StationControl(IChargeControl charger, IDisplay display, IDoor door, IRfidReader reader)
+        public StationControl(IChargeControl charger, IDisplay display, IDoor door, IRfidReader reader)
         {
             _charger = charger;
             _display = display;
