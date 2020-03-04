@@ -8,7 +8,10 @@ namespace ChargeLocker
 {
     interface IDoor
     {
-        event EventHandler LockDoor;
-        event EventHandler UnlockDoor;
+        event EventHandler DoorOpenEvent;
+        event EventHandler DoorCloseEvent;
+
+        void LockDoor();
+        void UnlockDoor();
     }
 }

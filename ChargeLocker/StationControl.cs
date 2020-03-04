@@ -22,16 +22,23 @@ namespace Ladeskab
         // Her mangler flere member variable
 
         private LadeskabState _state;
-        private IUsbCharger _charger;
-        private IChargeControl _chargeController;
+        private IChargeControl _charger;
         private IDisplay _display;
+        private IDoor _door;
 
 
         private int _oldId;
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
-        // Her mangler constructor
+        // We use constructor injection for all dependencies
+        StationControl(IChargeControl charger, IDisplay display, IDoor door, LadeskabState state)
+        {
+            _charger = charger;
+            _display = display;
+            _door = door;
+            _state = state;
+        }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
         private void RfidDetected(int id)
@@ -40,7 +47,7 @@ namespace Ladeskab
             {
                 case LadeskabState.Available:
                     // Check for ladeforbindelse
-                    if (_charger.Connected)
+                    if (_charger.IsConnected())
                     {
                         _door.LockDoor();
                         _charger.StartCharge();
@@ -86,6 +93,9 @@ namespace Ladeskab
                     break;
             }
         }
+
+
+
 
         // Her mangler de andre trigger handlere
     }
