@@ -19,26 +19,7 @@ namespace ChargeLocker
 
         public bool IsConnected()
         {
-            switch (_current)
-            {
-                case 0:
-                        return false;
-                    
-                case double current when (0.0 < current && current <= 5):
-                    return true;
-
-                case double current when (5.0 < current && current <= 500):
-                    return true;
-
-                case double current when (current > 500):
-                    return true;
-
-                default:
-                    return false;
-
-                    // Simple if statement would do...
-            }
-            
+            return _charger.Connected;
         }
         public void StartCharge()
         {

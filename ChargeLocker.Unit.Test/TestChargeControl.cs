@@ -19,13 +19,13 @@ namespace ChargeLocker.Unit.Test
         private IDisplay _display;
         private IDoor _door;
         private IRfidReader _reader;
-        private IUsbCharger _usbCharger;
+        private UsbChargerSimulator _usbCharger;
 
         [SetUp]
         public void Setup()
         {
             _usbCharger = new UsbChargerSimulator();
-            _uut = Substitute.For<IChargeControl>(_usbCharger);
+            _uut = new ChargeControl(_usbCharger);
             _display = Substitute.For<IDisplay>();
             _door    = Substitute.For<IDoor>();
             _reader  = Substitute.For<IRfidReader>();
@@ -36,11 +36,21 @@ namespace ChargeLocker.Unit.Test
         }
 
         [Test]
-        public void ChargeController_StartCharging_When_RFIDDetected()
+        public void ChargeController_StartCharging_When_valid_RFIDDetected()
         {
             _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
+            _usbCharger.SimulateConnected(true);
 
-            _uut.Received().StartCharge();
+            Assert.That(_uut.IsConnected(), Is.True);
+        }
+
+        [Test]
+        public void ChargeController_IsConnected_When_UsbChargerConnected()
+        {
+            _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
+            _usbCharger.SimulateConnected(true);
+
+            Assert.That(_uut.IsConnected(), Is.True);
         }
 
         [Test]
