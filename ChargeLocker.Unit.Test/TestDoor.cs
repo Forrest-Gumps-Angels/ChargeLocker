@@ -8,5 +8,6 @@ namespace ChargeLocker.Unit.Test
 {
     class TestDoor
     {
+
     }
 }

@@ -8,11 +8,12 @@ namespace ChargeLocker
 {
     public class RfidDetectedEventArgs : EventArgs
     {
-        public int id;
+        public int id { get; set; }
     }
     public interface IRfidReader
     {
         // Event handlers
         event EventHandler<RfidDetectedEventArgs> RfidDetectedEvent;
     }
+
 }
