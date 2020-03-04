@@ -25,6 +25,7 @@ namespace Ladeskab
         private IChargeControl _charger;
         private IDisplay _display;
         private IDoor _door;
+        private IRfidReader _reader;
 
 
         private int _oldId;
@@ -32,17 +33,23 @@ namespace Ladeskab
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
         // We use constructor injection for all dependencies
-        StationControl(IChargeControl charger, IDisplay display, IDoor door, LadeskabState state)
+        StationControl(IChargeControl charger, IDisplay display, IDoor door, IRfidReader reader)
         {
             _charger = charger;
             _display = display;
             _door = door;
-            _state = state;
+            _reader = reader;
+
+            _reader.RfidDetectedEvent += RfidDetected;
+            _door.DoorCloseEvent += DoorClosed;
+            _door.DoorOpenEvent += DoorOpened;
         }
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
-        private void RfidDetected(int id)
+        private void RfidDetected(object sender, RfidDetectedEventArgs eventArgs)
         {
+            int id = eventArgs.id;
+
             switch (_state)
             {
                 case LadeskabState.Available:
@@ -94,9 +101,14 @@ namespace Ladeskab
             }
         }
 
+        private void DoorOpened(object sender, EventArgs e)
+        {
+            _display.Display("Tilslut telefon");
+        }
 
-
-
-        // Her mangler de andre trigger handlere
+        private void DoorClosed(object sender, EventArgs e)
+        {
+            _display.Display("Indlæs RFID");
+        }
     }
 }

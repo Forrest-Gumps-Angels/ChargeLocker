@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UsbSimulator;
+using ChargeLocker;
 
 namespace ChargeLocker.Unit.Test
 {
@@ -16,6 +17,11 @@ namespace ChargeLocker.Unit.Test
         [SetUp]
         public void Setup()
         {
+            var _charger = new IChargeControl;
+            var _display = new IDisplay;
+            var _door = new IDoor;
+            var _reader = new IRfidReader;
+
             _uut = new StationControl();
         }
 
