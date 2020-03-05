@@ -13,5 +13,7 @@ namespace ChargeLocker
 
         void LockDoor();
         void UnlockDoor();
+        void OpenDoor();
+        void CloseDoor();
     }
 }

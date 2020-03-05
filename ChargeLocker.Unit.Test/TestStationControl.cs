@@ -68,7 +68,8 @@ namespace ChargeLocker.Unit.Test
             _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
             _usbCharger.SimulateConnected(false);
 
-            _display.ReceivedWithAnyArgs(1).Display(default);
+           // _display.ReceivedWithAnyArgs(1).Display(default);
+            _display.Received(1).Display(Arg.Any<string>());
         }
 
         [Test]

@@ -14,15 +14,25 @@ namespace ChargeLocker
         public Door() 
         { }
 
-        public void LockDoor()
+        public void CloseDoor()
         {
-            Console.WriteLine("Door is locked");
+            Console.WriteLine("Door is closed");
             OnDoorClosed();
         }
+        public void OpenDoor()
+        {
+            Console.WriteLine("Door is open");
+            OnDoorOpened();
+        }
+
+        public void LockDoor()
+        {
+            Console.WriteLine("LockDoor was called");
+        }
+
         public void UnlockDoor()
         {
-            Console.WriteLine("Door is unlocked");
-            OnDoorOpened();
+            Console.WriteLine("UnlockDoor was called");
         }
 
         protected virtual void OnDoorOpened()

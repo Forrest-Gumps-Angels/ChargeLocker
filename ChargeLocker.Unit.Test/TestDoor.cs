@@ -17,22 +17,22 @@ namespace ChargeLocker.Unit.Test
         }
 
         [Test]
-        public void Door_UnlockDoor_EventFired()
+        public void Door_OpenDoor_EventFired()
         {
             var wasCalled = false;
             _uut.DoorOpenEvent += (sender, args) => wasCalled = true;
 
-            _uut.DoorOpenEvent += Raise.Event();
+            _uut.OpenDoor();
             Assert.True(wasCalled);
         }
 
         [Test]
-        public void Door_LockDoor_EventFired()
+        public void Door_ClosekDoor_EventFired()
         {
             var wasCalled = false;
             _uut.DoorCloseEvent += (sender, args) => wasCalled = true;
 
-            _uut.DoorCloseEvent += Raise.Event();
+            _uut.CloseDoor();
             Assert.True(wasCalled);
         }
     }
