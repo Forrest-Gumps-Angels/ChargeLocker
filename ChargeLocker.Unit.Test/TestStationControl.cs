@@ -100,6 +100,7 @@ namespace ChargeLocker.Unit.Test
             _usbCharger.SimulateConnected(false);
 
             _display.ReceivedWithAnyArgs(1).Display(default);
+            //
         }
 
         [Test]
