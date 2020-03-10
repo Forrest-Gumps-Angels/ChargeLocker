@@ -14,6 +14,7 @@ namespace ChargeLocker
     {
         // Event handlers
         event EventHandler<RfidDetectedEventArgs> RfidDetectedEvent;
+        void RfidRead(int _id);
     }
 
 }
