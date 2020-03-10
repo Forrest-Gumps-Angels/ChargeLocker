@@ -65,10 +65,10 @@ namespace ChargeLocker.Unit.Test
         public void StationController_SendsMessage_when_IsConnected_is_false()
         {
             _door.DoorCloseEvent += Raise.Event();
-            _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
             _usbCharger.SimulateConnected(false);
+            _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
 
-           // _display.ReceivedWithAnyArgs(1).Display(default);
+            // _display.ReceivedWithAnyArgs(1).Display(default);
             _display.Received(1).Display("Tilslutningsfejl");
         }
 
