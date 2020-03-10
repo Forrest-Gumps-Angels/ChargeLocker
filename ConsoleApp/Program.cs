@@ -1,12 +1,13 @@
-﻿using Ladeskab;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ladeskab;
 using UsbSimulator;
+using ChargeLocker;
 
-namespace ChargeLocker
+namespace ConsoleApp
 {
     class Program
     {
@@ -18,8 +19,8 @@ namespace ChargeLocker
             ChargeControl charger = new ChargeControl(new UsbChargerSimulator());
             DisplayConsole display = new DisplayConsole();
 
-            StationControl statCtrl = new StationControl(charger,display,door,rfidReader);
-            
+            StationControl statCtrl = new StationControl(charger, display, door, rfidReader);
+
 
             bool finish = false;
             do
