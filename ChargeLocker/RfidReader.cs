@@ -11,9 +11,9 @@ namespace ChargeLocker
     {
         public event EventHandler<RfidDetectedEventArgs> RfidDetectedEvent;
 
-        public virtual void OnRfidRead(int id)
+        public virtual void OnRfidRead(int _id)
         {
-            RfidDetectedEventArgs rfidDetectedEventArgs = new RfidDetectedEventArgs() { id = id };
+            RfidDetectedEventArgs rfidDetectedEventArgs = new RfidDetectedEventArgs() { id = _id };
 
             RfidDetectedEvent?.Invoke(this, rfidDetectedEventArgs);
         }
