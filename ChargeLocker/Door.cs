@@ -14,6 +14,8 @@ namespace ChargeLocker
         public Door() 
         { }
 
+        public bool DoorLocked { get; set; }
+
         public void CloseDoor()
         {
             Console.WriteLine("Door is closed");
@@ -27,12 +29,14 @@ namespace ChargeLocker
 
         public void LockDoor()
         {
-            Console.WriteLine("LockDoor was called");
+            DoorLocked = true;
+            Console.WriteLine("Door is locked");
         }
 
         public void UnlockDoor()
         {
-            Console.WriteLine("UnlockDoor was called");
+            DoorLocked = false;
+            Console.WriteLine("Door is unlocked");
         }
 
         public virtual void OnDoorOpened()
