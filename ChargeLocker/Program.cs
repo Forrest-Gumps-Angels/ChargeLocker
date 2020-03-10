@@ -13,7 +13,7 @@ namespace ChargeLocker
             // Assemble your system here from all the classes
             Door door = new Door();
             RfidReader rfidReader = new RfidReader();
-            //HEJ RALLE
+            
 
             bool finish = false;
             do

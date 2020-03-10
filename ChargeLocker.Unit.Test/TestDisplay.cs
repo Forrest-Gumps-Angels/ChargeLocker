@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ChargeLocker.Unit.Test
 {
-    class TestDisplay
+    public class TestDisplay
     {
+
     }
 }
