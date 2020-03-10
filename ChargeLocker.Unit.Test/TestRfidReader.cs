@@ -23,6 +23,7 @@ namespace ChargeLocker.Unit.Test
         public void RfidReader_OnRfidRead_EventFired()
         {
             _uut.RfidRead(200);
+            _uut.OnRfidRead(200);
             _uut.ReceivedWithAnyArgs(1).RfidRead(Arg.Any<int>());
         }
     }
