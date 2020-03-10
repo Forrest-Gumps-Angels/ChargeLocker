@@ -15,8 +15,8 @@ namespace ChargeLocker.Unit.Test
     public class TestStationControl
     {
         private StationControl _uut;
-        private IChargeControl _charger;
         private IDisplay _display;
+        private IChargeControl _charger;
         private IDoor _door;
         private IRfidReader _reader;
         private UsbChargerSimulator _usbCharger;
@@ -25,8 +25,8 @@ namespace ChargeLocker.Unit.Test
         public void Setup()
         {
             _usbCharger = new UsbChargerSimulator();
-            _charger = Substitute.For<ChargeControl>(_usbCharger);
             _display = Substitute.For<IDisplay>();
+            _charger = Substitute.For<ChargeControl>(_usbCharger, _display);
             _door = Substitute.For<IDoor>();
             _reader = Substitute.For<IRfidReader>();
 

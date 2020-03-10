@@ -15,7 +15,7 @@ namespace ChargeLocker
             // Assemble your system here from all the classes
             Door door = new Door();
             RfidReader rfidReader = new RfidReader();
-            ChargeControl charger = new ChargeControl(new UsbChargerSimulator());
+            ChargeControl charger = new ChargeControl(new UsbChargerSimulator(), new DisplayConsole());
             DisplayConsole display = new DisplayConsole();
 
             StationControl statCtrl = new StationControl(charger,display,door,rfidReader);

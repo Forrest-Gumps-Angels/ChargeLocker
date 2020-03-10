@@ -25,8 +25,8 @@ namespace ChargeLocker.Unit.Test
         public void Setup()
         {
             _usbCharger = new UsbChargerSimulator();
-            _uut = new ChargeControl(_usbCharger);
             _display = Substitute.For<IDisplay>();
+            _uut = new ChargeControl(_usbCharger, _display);
             _door    = Substitute.For<IDoor>();
             _reader  = Substitute.For<IRfidReader>();
 
@@ -79,6 +79,62 @@ namespace ChargeLocker.Unit.Test
 
             // Make sure that usbcharger has been started
             Assert.AreEqual(_uut.IsConnected(), false);
+            _display.Received(0).DisplayStatus(Arg.Any<string>());
         }
+
+        [Test]
+        public void ChargeController_SetValue_on_Currentchanged()
+        {
+            _door.CloseDoor();
+            _usbCharger.SimulateOverload(false);
+            _usbCharger.SimulateConnected(true);
+            _usbCharger.StartCharge();
+
+
+
+            Assert.That(_uut.Current, Is.EqualTo(_usbCharger.CurrentValue));
+
+        }
+
+        [Test]
+        public void ChargeController_PrintMessage_fullycharged()
+        {
+            _door.CloseDoor();
+            _usbCharger.SimulateOverload(false);
+            _usbCharger.SimulateConnected(true);
+            _usbCharger.StartCharge();
+
+            System.Threading.Thread.Sleep(61000);
+
+            _display.Received().DisplayStatus("Telefonen er fuldt opladet!");
+
+        }
+
+        [Test]
+        public void ChargeController_PrintMessage_on_charging()
+        {
+            _door.CloseDoor();
+            _usbCharger.SimulateOverload(false);
+            _usbCharger.SimulateConnected(true);
+            _usbCharger.StartCharge();
+
+            _display.Received(1).DisplayStatus("Ladningen foregår! Current is at: " + _uut.Current);
+
+        }
+
+        [Test]
+        public void ChargeController_PrintMessage_on_overload()
+        {
+            _door.CloseDoor();
+            _usbCharger.SimulateOverload(true);
+            _usbCharger.SimulateConnected(true);
+            _usbCharger.StartCharge();
+
+            _display.Received(1).DisplayStatus("Hov! Der gik noget galt. Frakobl straks dit ringe apparat!");
+
+        }
+
+
+
     }
 }

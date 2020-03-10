@@ -63,7 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChargeControl.cs" />
-    <Compile Include="Display.cs" />
+    <Compile Include="DisplayConsole.cs" />
     <Compile Include="Door.cs" />
     <Compile Include="IChargeControl.cs" />
     <Compile Include="IDisplay.cs" />

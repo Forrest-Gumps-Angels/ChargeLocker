@@ -15,5 +15,12 @@ namespace ChargeLocker
             Console.ResetColor();
 
         }
+        public void DisplayStatus(string message)
+        {
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(message);
+            Console.ResetColor();
+
+        }
     }
 }

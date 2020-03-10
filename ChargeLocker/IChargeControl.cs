@@ -13,5 +13,9 @@ namespace ChargeLocker
         void StartCharge();
         void StopCharge();
         void currentChangedEventHandler(object sender, CurrentChangedEventArgs e);
+
+
+        double Current { get; set; }
+
     }
 }
