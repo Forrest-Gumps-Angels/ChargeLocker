@@ -22,8 +22,13 @@ namespace ChargeLocker.Unit.Test
         [Test]
         public void RfidReader_OnRfidRead_EventFired()
         {
+            int Argument = 0;
+            var wasCalled = false;
+            _uut.RfidDetectedEvent += ((sender, e) => { wasCalled = true;
+                                                         Argument = e.id; });
             _uut.RfidRead(200);
-            _uut.ReceivedWithAnyArgs(1).RfidRead(Arg.Any<int>());
+            Assert.True(wasCalled);
+            Assert.That(Argument, Is.EqualTo(200));
         }
     }
 }
