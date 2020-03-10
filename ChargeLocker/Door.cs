@@ -35,12 +35,12 @@ namespace ChargeLocker
             Console.WriteLine("UnlockDoor was called");
         }
 
-        protected virtual void OnDoorOpened()
+        public virtual void OnDoorOpened()
         {
             DoorOpenEvent?.Invoke(this, EventArgs.Empty);
         }
 
-        protected virtual void OnDoorClosed()
+        public virtual void OnDoorClosed()
         {
             DoorCloseEvent?.Invoke(this, EventArgs.Empty);
         }

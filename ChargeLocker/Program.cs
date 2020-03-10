@@ -11,6 +11,8 @@ namespace ChargeLocker
         static void Main(string[] args)
         {
             // Assemble your system here from all the classes
+            Door door = new Door();
+            RfidReader rfidReader = new RfidReader();
 
             bool finish = false;
             do
@@ -27,11 +29,11 @@ namespace ChargeLocker
                         break;
 
                     case 'O':
-                        door.OnDoorOpen();
+                        door.OnDoorOpened();
                         break;
 
                     case 'C':
-                        door.OnDoorClose();
+                        door.OnDoorClosed();
                         break;
 
                     case 'R':
@@ -49,6 +51,4 @@ namespace ChargeLocker
             } while (!finish);
         }
     }
-}
-
 }
