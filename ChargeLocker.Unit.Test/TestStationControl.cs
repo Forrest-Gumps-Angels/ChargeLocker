@@ -40,7 +40,7 @@ namespace ChargeLocker.Unit.Test
         {
             _door.DoorOpenEvent += Raise.Event();
 
-            _display.ReceivedWithAnyArgs(1).Display(default);
+            _display.Received(1).Display("Tilslut telefon");
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace ChargeLocker.Unit.Test
         {
             _door.DoorCloseEvent += Raise.Event();
 
-            _display.ReceivedWithAnyArgs(1).Display(default);
+            _display.Received(1).Display("Indlæs RFID");
         }
 
 
@@ -65,11 +65,11 @@ namespace ChargeLocker.Unit.Test
         public void StationController_SendsMessage_when_IsConnected_is_false()
         {
             _door.DoorCloseEvent += Raise.Event();
-            _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
             _usbCharger.SimulateConnected(false);
+            _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
 
-           // _display.ReceivedWithAnyArgs(1).Display(default);
-            _display.Received(1).Display(Arg.Any<string>());
+            // _display.ReceivedWithAnyArgs(1).Display(default);
+            _display.Received(1).Display("Tilslutningsfejl");
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace ChargeLocker.Unit.Test
             _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
             _usbCharger.SimulateConnected(false);
 
-            _display.ReceivedWithAnyArgs(1).Display(default);
+            _display.Received(1).Display("Ladeskab optaget");
             //
         }
 
@@ -112,7 +112,7 @@ namespace ChargeLocker.Unit.Test
             // New RFID wih incorrect id
             _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 0 });
 
-            _display.ReceivedWithAnyArgs(1).Display(default);
+            _display.Received(1).Display("RFID fejl");
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace ChargeLocker.Unit.Test
             // New RFID wih incorrect id
             _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
 
-            _display.ReceivedWithAnyArgs(1).Display(default);
+            _display.Received(1).Display("Fjern telefon");
         }
 
     }

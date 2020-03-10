@@ -67,7 +67,6 @@
     <Compile Include="TestRfidReader.cs" />
     <Compile Include="TestStationControl.cs" />
     <Compile Include="TestUsbChargerSimulator.cs" />
-    <Compile Include="UsbChargerSimulator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
