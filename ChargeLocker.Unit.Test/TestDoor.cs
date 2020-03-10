@@ -40,14 +40,14 @@ namespace ChargeLocker.Unit.Test
         public void Door_LockedDoor()
         {
             _uut.LockDoor();
-            Assert.True(_uut.DoorLocked());
+            Assert.True(_uut.DoorLocked);
         }
 
         [Test]
         public void Door_UnlockedDoor()
         {
             _uut.UnlockDoor();
-            Assert.False(_uut.DoorLocked());
+            Assert.False(_uut.DoorLocked);
         }
     }
 }
