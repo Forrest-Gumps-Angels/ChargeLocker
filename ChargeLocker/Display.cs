@@ -10,8 +10,10 @@ namespace ChargeLocker
     {
         public void Display(string message)
         {
+            Console.BackgroundColor = ConsoleColor.Blue;
             Console.WriteLine(message);
-            
+            Console.ResetColor();
+
         }
     }
 }

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Ladeskab;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UsbSimulator;
 
 namespace ChargeLocker
 {
@@ -13,6 +15,10 @@ namespace ChargeLocker
             // Assemble your system here from all the classes
             Door door = new Door();
             RfidReader rfidReader = new RfidReader();
+            ChargeControl charger = new ChargeControl(new UsbChargerSimulator());
+            DisplayConsole display = new DisplayConsole();
+
+            StationControl statCtrl = new StationControl(charger,display,door,rfidReader);
             
 
             bool finish = false;
