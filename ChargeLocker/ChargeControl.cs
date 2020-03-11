@@ -7,13 +7,21 @@ using UsbSimulator;
 
 namespace ChargeLocker
 {
-    public class ChargeControl : IChargeControl
+    public class ChargeControl : IChargeControl, IDisplay
     {
         private IUsbCharger _charger;
         private IDisplay _display;
         private double current;
 
         public double Current { get => current; set => current = value; }
+
+        public IChargeControl IChargeControl
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
         public ChargeControl(IUsbCharger charger, IDisplay display)
         {
@@ -39,7 +47,7 @@ namespace ChargeLocker
             Current = e.Current;
             switch (Current)
             {
-                case double n when (n > 0 && n <= 5 ):
+                case double n when (n > 0 && n <= 5):
                     _display.DisplayStatus("Telefonen er fuldt opladet!");
                     break;
                 case double n when (n > 5 && n <= 500):
