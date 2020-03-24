@@ -7,7 +7,7 @@ using UsbSimulator;
 
 namespace ChargeLocker
 {
-    public class ChargeControl : IChargeControl, IDisplay
+    public class ChargeControl : IChargeControl
     {
         private IUsbCharger _charger;
         private IDisplay _display;
