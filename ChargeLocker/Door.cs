@@ -18,13 +18,19 @@ namespace ChargeLocker
 
         public void CloseDoor()
         {
-            Console.WriteLine("Door is closed");
-            OnDoorClosed();
+            if (!DoorLocked)
+            {
+                Console.WriteLine("Door is closed");
+                OnDoorClosed();
+            }
         }
         public void OpenDoor()
         {
-            Console.WriteLine("Door is open");
-            OnDoorOpened();
+            if (!DoorLocked)
+            {
+                Console.WriteLine("Door is open");
+                OnDoorOpened();
+            }
         }
 
         public void LockDoor()

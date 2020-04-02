@@ -14,7 +14,6 @@ namespace ChargeLocker.Unit.Test
     [TestFixture]
     public class TestChargeControl
     {
-        private StationControl _stCTRL;
         private IChargeControl _uut;
         private IDisplay _display;
         private IDoor _door;
@@ -31,16 +30,15 @@ namespace ChargeLocker.Unit.Test
             _reader  = Substitute.For<IRfidReader>();
 
 
-            _stCTRL = new StationControl(_uut, _display,_door, _reader);
 
         }
 
         [Test]
-        public void ChargeController_StartCharging_When_valid_RFIDDetected()
+        public void ChargeController_call_StartCharging_on_usbcharger_when_startingcharge()
         {
             _door.DoorCloseEvent += Raise.Event();
             _usbCharger.Connected.Returns(true);
-            _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
+            _uut.StartCharge();
             _usbCharger.ReceivedWithAnyArgs().StartCharge();
         }
 
