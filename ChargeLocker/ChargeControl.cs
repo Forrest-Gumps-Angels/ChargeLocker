@@ -54,7 +54,7 @@ namespace ChargeLocker
                     _display.DisplayStatus("Ladningen foregår! Current is at: " + Current);
                     break;
                 case double n when (n > 500):
-                    _display.DisplayStatus("Hov! Der gik noget galt. Frakobl straks dit ringe apparat!");
+                    _display.DisplayStatus("Hov! Der gik noget galt. Frakobl straks dit ringeapparat!");
                     break;
             }
         }

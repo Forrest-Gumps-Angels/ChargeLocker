@@ -82,42 +82,47 @@ namespace ChargeLocker.Unit.Test
 
         }
 
-        //[Test]
-        //public void ChargeController_PrintMessage_fullycharged()
-        //{
-        //    _door.CloseDoor();
-        //    _usbCharger.SimulateOverload(false);
-        //    _usbCharger.SimulateConnected(true);
-        //    _usbCharger.StartCharge();
+        [TestCase(0.01, "Telefonen er fuldt opladet!")]
+        [TestCase(2.5, "Telefonen er fuldt opladet!")]
+        [TestCase(5, "Telefonen er fuldt opladet!")]
+        public void ChargeController_PrintMessage_fullycharged(double current, string expected)
+        {
+            _door.CloseDoor();
 
-        //    System.Threading.Thread.Sleep(61000);
+            _usbCharger.Connected.Returns(true);
+            _usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentChangedEventArgs { Current = current });
 
-        //    _display.Received().DisplayStatus("Telefonen er fuldt opladet!");
+            _display.Received().DisplayStatus(expected);
 
-        //}
+        }
 
-        //[Test]
-        //public void ChargeController_PrintMessage_on_charging()
-        //{
-        //    _door.CloseDoor();
-        //    _usbCharger.SimulateOverload(false);
-        //    _usbCharger.SimulateConnected(true);
-        //    _usbCharger.StartCharge();
+        [TestCase(5.01, "Ladningen foregår! Current is at: 5,01")]
+        [TestCase(250, "Ladningen foregår! Current is at: 250")]
+        [TestCase(500, "Ladningen foregår! Current is at: 500")]
+        public void ChargeController_PrintMessage_on_charging(double current, string expected)
+        {
+            _door.CloseDoor();
 
-        //    _display.Received(1).DisplayStatus("Ladningen foregår! Current is at: " + _uut.Current);
+            _usbCharger.Connected.Returns(true);
+            _usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentChangedEventArgs { Current = current });
 
-        //}
+            _display.Received().DisplayStatus(expected);
 
-        //[Test]
-        //public void ChargeController_PrintMessage_on_overload()
-        //{
-        //    _door.CloseDoor();
-        //    _usbCharger.SimulateOverload(true);
-        //    _usbCharger.SimulateConnected(true);
-        //    _usbCharger.StartCharge();
 
-        //    _display.Received(1).DisplayStatus("Hov! Der gik noget galt. Frakobl straks dit ringe apparat!");
+        }
 
-        //}
+        [TestCase(500.01, "Hov! Der gik noget galt. Frakobl straks dit ringeapparat!")]
+        [TestCase(750, "Hov! Der gik noget galt. Frakobl straks dit ringeapparat!")]
+        [TestCase(1000, "Hov! Der gik noget galt. Frakobl straks dit ringeapparat!")]
+        public void ChargeController_PrintMessage_on_overload(double current, string expected)
+        {
+            _door.CloseDoor();
+
+            _usbCharger.Connected.Returns(true);
+            _usbCharger.CurrentValueEvent += Raise.EventWith(new CurrentChangedEventArgs { Current = current });
+
+            _display.Received(1).DisplayStatus(expected);
+
+        }
     }
 }
