@@ -11,7 +11,10 @@ namespace ChargeLocker
         event EventHandler DoorOpenEvent;
         event EventHandler DoorCloseEvent;
 
+        bool DoorLocked { get; set; }
         void LockDoor();
         void UnlockDoor();
+        void OpenDoor();
+        void CloseDoor();
     }
 }

@@ -10,11 +10,24 @@ namespace ChargeLocker
     public class ChargeControl : IChargeControl
     {
         private IUsbCharger _charger;
-        private double _current;
+        private IDisplay _display;
+        private double current;
 
-        public ChargeControl(IUsbCharger charger)
+        public double Current { get => current; set => current = value; }
+
+        public IChargeControl IChargeControl
         {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public ChargeControl(IUsbCharger charger, IDisplay display)
+        {
+            _display = display;
             _charger = charger;
+            _charger.CurrentValueEvent += currentChangedEventHandler;
         }
 
         public bool IsConnected()
@@ -31,7 +44,19 @@ namespace ChargeLocker
         }
         public void currentChangedEventHandler(object sender, CurrentChangedEventArgs e)
         {
-            _current = e.Current;
+            Current = e.Current;
+            switch (Current)
+            {
+                case double n when (n > 0 && n <= 5):
+                    _display.DisplayStatus("Telefonen er fuldt opladet!");
+                    break;
+                case double n when (n > 5 && n <= 500):
+                    _display.DisplayStatus("Ladningen foregår! Current is at: " + Current);
+                    break;
+                case double n when (n > 500):
+                    _display.DisplayStatus("Hov! Der gik noget galt. Frakobl straks dit ringe apparat!");
+                    break;
+            }
         }
     }
 }
