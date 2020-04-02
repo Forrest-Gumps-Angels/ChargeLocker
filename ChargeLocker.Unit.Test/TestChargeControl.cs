@@ -19,12 +19,12 @@ namespace ChargeLocker.Unit.Test
         private IDisplay _display;
         private IDoor _door;
         private IRfidReader _reader;
-        private UsbChargerSimulator _usbCharger;
+        private IUsbCharger _usbCharger;
 
         [SetUp]
         public void Setup()
         {
-            _usbCharger = new UsbChargerSimulator();
+            _usbCharger = Substitute.For<IUsbCharger>();
             _uut = new ChargeControl(_usbCharger);
             _display = Substitute.For<IDisplay>();
             _door    = Substitute.For<IDoor>();
@@ -39,33 +39,24 @@ namespace ChargeLocker.Unit.Test
         public void ChargeController_StartCharging_When_valid_RFIDDetected()
         {
             _door.DoorCloseEvent += Raise.Event();
-            _usbCharger.SimulateConnected(true);
+            _usbCharger.Connected.Returns(true);
             _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
-           
-
-            // Make sure that usbcharger has been started
-            Assert.Greater(_usbCharger.CurrentValue, 0);
+            _usbCharger.ReceivedWithAnyArgs().StartCharge();
         }
 
         [Test]
         public void ChargeController_NotCharging_When_no_RFIDDetected()
         {
             _door.DoorCloseEvent += Raise.Event();
-            _usbCharger.SimulateConnected(true);
-
-            // Make sure that usbcharger has been started
-            Assert.AreEqual(_usbCharger.CurrentValue, 0);
+            _usbCharger.Connected.Returns(true);
+            _usbCharger.DidNotReceiveWithAnyArgs().StartCharge();
         }
 
         [Test]
         public void ChargeController_IsConnected_When_UsbChargerConnected()
         {
-            // Typisk brugsscenarie
             _door.DoorCloseEvent += Raise.Event();
-            _usbCharger.SimulateConnected(true);
-            _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
-
-            // Make sure that usbcharger has been started
+            _usbCharger.Connected.Returns(true);
             Assert.AreEqual(_uut.IsConnected(), true);
         }
 
@@ -74,10 +65,7 @@ namespace ChargeLocker.Unit.Test
         {
             // Typisk brugsscenarie
             _door.DoorCloseEvent += Raise.Event();
-            _usbCharger.SimulateConnected(false);
-            _reader.RfidDetectedEvent += Raise.EventWith(new RfidDetectedEventArgs { id = 1403 });
-
-            // Make sure that usbcharger has been started
+            _usbCharger.Connected.Returns(false);
             Assert.AreEqual(_uut.IsConnected(), false);
         }
     }
